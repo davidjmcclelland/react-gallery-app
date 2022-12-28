@@ -1,4 +1,5 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
+import Image from './Image';
 
 //endpoints
 // 'https://dog.ceo/api/breed/affenpinscher/images/random'
@@ -11,8 +12,7 @@ const Gallery = () => {
 
   const fetchBreeds = async () => {
 
-    let breeds = ["Beagle", "Doberman", "Retriever"];;
-    //breeds = Object.keys(breeds.message);
+    let breeds = ["African", "Airdale", "Beagle", "Coondog", "Doberman", "Labrador", "Pointer", "Retriever", "Setter"];;
 
     setBreeds(breeds);
   }
@@ -23,10 +23,9 @@ const Gallery = () => {
 
   return (
     <>
-    <div className="get-breeds">Get Breeds</div>
-    <div className="breed-names">
+    <div className="js_gallery">
         {breeds.map((breed) => (
-          <div key={breed}>{breed}</div>
+          <Image breed={breed} />
         ))}
     </div>
     </>
