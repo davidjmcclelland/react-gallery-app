@@ -2,17 +2,17 @@ import React, { useState, useEffect  } from "react";
 
 //endpoints
 // 'https://dog.ceo/api/breed/affenpinscher/images/random'
-const breedsEndPoint = 'https://dog.ceo/api/breeds/list/all';
+//const breedsEndPoint = 'https://dog.ceo/api/breeds/list/all';
 // "https://jsonplaceholder.typicode.com/users"
 
-const GetBreeds = () => {
+const Gallery = () => {
 
   const [breeds, setBreeds] = useState([]);
 
   const fetchBreeds = async () => {
-    const response = await fetch(breedsEndPoint);
-    let breeds = await response.json();
-    breeds = Object.keys(breeds.message);
+
+    let breeds = ["Beagle", "Doberman", "Retriever"];;
+    //breeds = Object.keys(breeds.message);
 
     setBreeds(breeds);
   }
@@ -33,4 +33,4 @@ const GetBreeds = () => {
   )
 }
 
-export default GetBreeds;
+export default Gallery;

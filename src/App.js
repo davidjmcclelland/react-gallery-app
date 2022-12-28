@@ -1,10 +1,10 @@
 import './App.css';
-import GetBreeds from './components/GetBreeds';
+import Gallery from './components/Gallery';
 
 function App() {
   return (
     <div className="App">
-      <GetBreeds />
+      <Gallery/>
     </div>
   );
 }
