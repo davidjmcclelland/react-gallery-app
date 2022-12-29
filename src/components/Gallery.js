@@ -46,20 +46,30 @@ const Gallery = () => {
     }
   }
 
-  return (
-    <>
-      <div className="js_gallery" key="0">
-        {breeds.map((breed, index) => (
-          <Image
-            breed={breed}
-            imageRequest={imageList[index]}
-            key={index}
-            loadedFunc={checkIfLoaded} />
-        ))}
-      </div>
-    </>
-  );
-};
+  const ShowImages = () => {
+    return (
+      <>
+        <div className="js_gallery" key="0">
+          {breeds.map((breed, index) => (
+            <Image
+              breed={breed}
+              imageRequest={imageList[index]}
+              key={index}
+              loadedFunc={checkIfLoaded} />
+          ))}
+        </div>
+      </>
+    );
+  }
+
+
+  const ShowLoading = () => {
+    return (
+      <>
+        <div>Loading...</div>
+      </>
+    )
+  }
 
   const LoadSwitcher = (props) => {
      if (props.loading) {
