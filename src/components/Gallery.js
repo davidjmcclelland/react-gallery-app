@@ -10,7 +10,8 @@ let imagesLoaded = 0;
 const Gallery = () => {
   const [breeds, setBreeds] = useState([]);
   const [imageList, setImageList] = useState([]);
-
+  const [loadingImages, setLoadingImages] = useState(true);
+  
   const fetchBreeds = async () => {
     const response = await fetch(breedsEndPoint);
     let breeds = await response.json();
