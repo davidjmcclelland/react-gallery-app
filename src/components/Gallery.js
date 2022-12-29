@@ -61,4 +61,18 @@ const Gallery = () => {
   );
 };
 
+  const LoadSwitcher = (props) => {
+     if (props.loading) {
+       return <ShowLoading />;
+    }
+    return <ShowImages />;
+  }
+
+    return (
+      <>
+        <LoadSwitcher loading={loadingImages} />
+      </>
+    );
+}
+
 export default Gallery;
