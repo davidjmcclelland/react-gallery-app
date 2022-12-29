@@ -4,7 +4,8 @@ import getURIs from "../helpers/getURIs";
 //endpoints
 // 'https://dog.ceo/api/breed/affenpinscher/images/random'
 const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
-// "https://jsonplaceholder.typicode.com/users"
+let loadingStage = 0;
+let imagesLoaded = 0;
 
 const Gallery = () => {
   const [breeds, setBreeds] = useState([]);
@@ -15,7 +16,9 @@ const Gallery = () => {
     let breeds = await response.json();
     breeds = Object.keys(breeds.message);
     setBreeds(breeds);
+    loadingStage = 1;
     requestRandomPics(getURIs(breeds));
+    loadingStage = 2;
   };
 
   useEffect(() => {
@@ -36,11 +39,22 @@ const Gallery = () => {
     setImageList(imageURLs);
   };
 
+  const checkIfLoaded = () => {
+    imagesLoaded++;
+    if (imagesLoaded == breeds.length) {
+      alert("done loading");
+    }
+  }
+
   return (
     <>
       <div className="js_gallery" key="0">
         {breeds.map((breed, index) => (
-          <Image breed={breed} imageRequest={imageList[index]} key={index} />
+          <Image
+            breed={breed}
+            imageRequest={imageList[index]}
+            key={index}
+            loadedFunc={checkIfLoaded} />
         ))}
       </div>
     </>
