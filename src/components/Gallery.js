@@ -17,9 +17,7 @@ const Gallery = () => {
     let breeds = await response.json();
     breeds = Object.keys(breeds.message);
     setBreeds(breeds);
-    loadingStage = 1;
     requestRandomPics(getURIs(breeds));
-    loadingStage = 2;
   };
 
   useEffect(() => {
@@ -36,14 +34,13 @@ const Gallery = () => {
     const imageURLs = links.map((link) => {
       return link.message;
     });
-    console.log(imageURLs);
     setImageList(imageURLs);
   };
 
   const checkIfLoaded = () => {
     imagesLoaded++;
     if (imagesLoaded == breeds.length) {
-      alert("done loading");
+        setLoadingImages(false);
     }
   }
 
@@ -62,7 +59,6 @@ const Gallery = () => {
       </>
     );
   }
-
 
   const ShowLoading = () => {
     return (
