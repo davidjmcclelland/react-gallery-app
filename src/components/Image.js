@@ -4,13 +4,15 @@ const Image = (props) => {
   const imageLoaded = props.loadedFunc;
 
   return (
-    <div className="js_img" key={breed}>
+    <div key={breed}>
       {breed}
       <img
+        className="js_img"
         src={imageRequest}
-        index={breed}
+        key={breed}
         onLoad={() => imageLoaded()}
-        alt={breed} />
+        alt={breed}
+      />
     </div>
   );
 };

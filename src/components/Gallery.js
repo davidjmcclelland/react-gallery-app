@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Image from "./Image";
+import React, { useEffect, useState } from "react";
 import getURIs from "../helpers/getURIs";
-//endpoints
-// 'https://dog.ceo/api/breed/affenpinscher/images/random'
+
 const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
-let loadingStage = 0;
-let imagesLoaded = 0;
-
-const Gallery = () => {
-  const [breeds, setBreeds] = useState([]);
-  const [imageList, setImageList] = useState([]);
-  const [loadingImages, setLoadingImages] = useState(true);
-  
-  const fetchBreeds = async () => {
-    const response = await fetch(breedsEndPoint);
-    let breeds = await response.json();
-    breeds = Object.keys(breeds.message);
-    setBreeds(breeds);
-    requestRandomPics(getURIs(breeds));
-  };
-
-  useEffect(() => {
-    fetchBreeds();
-  }, []);
 
   const requestRandomPics = async (_imageRequests) => {
     const links = await Promise.all(
@@ -34,52 +13,97 @@ const Gallery = () => {
     const imageURLs = links.map((link) => {
       return link.message;
     });
-    setImageList(imageURLs);
-  };
+    return imageURLs
+};
+  
+const ImageLoadResults = ({ images }) => {
+  const [loadedImages, setLoadedImages] = useState({});
+  const [ready, setReady] = useState(false);
 
-  const checkIfLoaded = () => {
-    imagesLoaded++;
-    if (imagesLoaded == breeds.length) {
-        setLoadingImages(false);
+  function handleImageLoaded(src) {
+    const newLoadedImages = {
+      ...loadedImages,
+      [src]: true,
+    };
+
+    // Check if all images is loaded
+    const newLoadedImagesArr = Object.keys(newLoadedImages);
+    if (
+      newLoadedImagesArr.length === images.results.length &&
+      images.results.every((v) => newLoadedImagesArr.includes(v))
+    ) {
+      console.log("All images loaded");
+      setReady(true);
     }
+
+    setLoadedImages(newLoadedImages);
   }
 
-  const ShowImages = () => {
-    return (
-      <>
-        <div className="js_gallery" key="0">
-          {breeds.map((breed, index) => (
-            <Image
-              breed={breed}
-              imageRequest={imageList[index]}
-              key={index}
-              loadedFunc={checkIfLoaded} />
-          ))}
-        </div>
+  //TODO: load images from component or handle hover
+  
+  return (
+    <>
+    <div
+      id="js_loading"
+      style = {{ display: ready ? "none" : "flex" }}
+    >
+      <h1>Loading...</h1>
+    </div>
+    <div
+      id="js_gallery"
+      style={{ visibility: ready ? "visible" : "hidden" }}
+    >
+      {images.results.map((result, index) => {
+        return (
+          <div className="result-item" key={index}>
+            <img
+              className="js_img"
+              src={result}
+              alt="..."
+              onLoad={() => {
+                handleImageLoaded(result);
+              }}
+            />
+          </div>
+        );
+      })}
+      </div>
       </>
-    );
-  }
-
-  const ShowLoading = () => {
-    return (
-      <>
-        <div>Loading...</div>
-      </>
-    )
-  }
-
-  const LoadSwitcher = (props) => {
-    if (props.loading) {
-      return <ShowLoading />;
-    }
-    return <ShowImages />;
-  }
-
-    return (
-      <>
-        <LoadSwitcher loading={loadingImages} />
-      </>
-    );
+  );
 }
 
-export default Gallery;
+const Gallery = () => {
+  const [images, setImages] = useState([]);
+  const fetchBreeds = async () => {
+    const response = await fetch(breedsEndPoint);
+    let breeds = await response.json();
+    breeds = Object.keys(breeds.message);
+    return breeds;
+  };
+
+  //daisychain multiple async requests
+  useEffect(() => {
+    fetchBreeds().then((data) => {
+      requestRandomPics(getURIs(data)).then((data) => {
+        fetchImages(data).then((data) => {
+          setImages(data);
+        });
+      });
+    })
+  }, []);
+
+  // fetch image data from API
+  async function fetchImages(imageList) {
+    return new Promise((resolve) => {
+        resolve(imageList);
+    });
+  }
+
+  return (
+    <div>
+      {images && images.length && <ImageLoadResults images={{ results: images }} />}
+    </div>
+  );
+}
+
+export default Gallery
