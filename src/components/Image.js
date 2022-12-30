@@ -35,7 +35,7 @@ const Image = (props) => {
           key={`_${index}`}
           style={{ display: isTooltipShown ? "block" : "none" }}
         >
-          {breed}
+          &nbsp;{breed}
         </span>
       </div>
     </div>

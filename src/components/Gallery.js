@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import getURIs from "../helpers/getURIs";
-import Image from './Image';
+import Image from "./Image";
 
 const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
 
-  const requestRandomPics = async (_imageRequests) => {
-    const links = await Promise.all(
-      _imageRequests.map(async (url) => {
-        const resp = await fetch(url);
-        return resp.json();
-      })
-    );
-    const imageURLs = links.map((link) => {
-      return link.message;
-    });
-    return imageURLs
+const requestRandomPics = async (_imageRequests) => {
+  const links = await Promise.all(
+    _imageRequests.map(async (url) => {
+      const resp = await fetch(url);
+      return resp.json();
+    })
+  );
+  const imageURLs = links.map((link) => {
+    return link.message;
+  });
+  return imageURLs;
 };
-  
+
 const ImageLoadResults = ({ images }) => {
   const [loadedImages, setLoadedImages] = useState({});
   const [ready, setReady] = useState(false);
@@ -40,33 +40,40 @@ const ImageLoadResults = ({ images }) => {
     setLoadedImages(newLoadedImages);
   }
 
-  //TODO: load images from component or handle hover
+    let height = {
+       display: ready ? "none" : "flex"
+  };
   
+  let overflow = {
+    overflow: ready ? "visible" : 'hidden'
+  }
+
+    let display = {
+       visibility: ready ? "visible" : "hidden"
+    };
+
   return (
     <>
-    <div
-      id="js_loading"
-      style = {{ display: ready ? "none" : "flex" }}
-    >
-      <h1>Loading...</h1>
-    </div>
-    <div
-      id="js_gallery"
-      style={{ visibility: ready ? "visible" : "hidden" }}
-    >
-      {images.results.map((result, index) => {
-        return (
-          <Image
-            breed={breeds[index]}
-            loadedFunc={handleImageLoaded}
-            index={index}
-            imageSrc={result} />
-        );
-      })}
+      <div id="js_loading" style={{ display: ready ? "none" : "flex" }}>
+        <h1>Loading...</h1>
       </div>
-      </>
+      <div id="js_gallery" style={{ ...display, ...overflow }}>
+        {breeds &&
+          breeds.length > 0 &&
+          images.results.map((result, index) => {
+            return (
+              <Image
+                breed={breeds[index]}
+                loadedFunc={handleImageLoaded}
+                index={index}
+                imageSrc={result}
+              />
+            );
+          })}
+      </div>
+    </>
   );
-}
+};
 
 let breeds;
 
@@ -87,27 +94,29 @@ export default function Gallery() {
           setImages(data);
         });
       });
-    })
+    });
   }, []);
 
   // fetch image data from API
   async function fetchImages(imageList) {
     return new Promise((resolve) => {
-        resolve(imageList);
+      resolve(imageList);
     });
   }
 
-    const ShowLoading = () => {
-      return (
-        <>
-          <div>Loading...</div>
-        </>
-      );
-    };
+  const ShowLoading = () => {
+    return (
+      <>
+        <div>Loading...</div>
+      </>
+    );
+  };
 
   return (
     <div>
-      {images && images.length && <ImageLoadResults images={{ results: images }} />}
+      {images && images.length && (
+        <ImageLoadResults images={{ results: images }} />
+      )}
     </div>
   );
 }

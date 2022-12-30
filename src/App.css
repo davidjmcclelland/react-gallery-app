@@ -1,14 +1,17 @@
+body {
+    background-color: gray;
+}
+
 .App {
   display: flex;
   flex-direction: row;
-
-  background-color: gray;
 }
 
 #js_gallery{
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 100px;
+  overflow: hidden;
   flex-wrap: wrap;
   align-items:flex-end;
 }
@@ -44,5 +47,5 @@ span.js_name {
   display:none;
   margin-left: 0px;
   margin-top: -24px;
-  z-index: 10000;
+  text-transform: capitalize;
 }
