@@ -19,23 +19,29 @@ const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
 
 const Gallery = () => {
   const [breeds, setBreeds] = useState([]);
+  const [imageURLs, setImageURLs] = useState([]);
   
   const fetchBreeds = async () => {
     const response = await fetch(breedsEndPoint);
     let breedList = await response.json();
     breedList = Object.keys(breedList.message);
     setBreeds(breedList);
+    return breedList;
   };
 
   useEffect(() => {
-    fetchBreeds();
+    fetchBreeds().then((data) => {
+      requestRandomPics(getURIs(data)).then((data) => {
+        setImageURLs(data);
+      });
+    });
   }, []);
 
   return (
     <>
       <div className="js_gallery">
-        {breeds.map((breed, index) => (
-          <Image breed={breed} key={index} />
+        {imageURLs.map((src, index) => (
+          <Image src={src} breed={breeds[index]} key={index} />
         ))}
       </div>
     </>
