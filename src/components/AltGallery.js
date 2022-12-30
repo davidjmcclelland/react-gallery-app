@@ -16,7 +16,7 @@ const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
     return imageURLs
 };
   
-function HeaderResults({ images }) {
+const ImageLoadResults = ({ images }) => {
   const [loadedImages, setLoadedImages] = useState({});
   const [ready, setReady] = useState(false);
 
@@ -40,7 +40,15 @@ function HeaderResults({ images }) {
   }
 
   //TODO: load images from component or handle hover
+  
   return (
+    <>
+    <div
+      id="js_loading"
+      style = {{ display: ready ? "none" : "flex" }}
+    >
+      <h1>Loading...</h1>
+    </div>
     <div
       id="js_gallery"
       style={{ visibility: ready ? "visible" : "hidden" }}
@@ -59,7 +67,8 @@ function HeaderResults({ images }) {
           </div>
         );
       })}
-    </div>
+      </div>
+      </>
   );
 }
 
@@ -72,6 +81,7 @@ export default function AltGallery() {
     return breeds;
   };
 
+  //daisychain multiple async requests
   useEffect(() => {
     fetchBreeds().then((data) => {
       requestRandomPics(getURIs(data)).then((data) => {
@@ -82,21 +92,24 @@ export default function AltGallery() {
     })
   }, []);
 
-  // Simulate fetch data from API
+  // fetch image data from API
   async function fetchImages(imageList) {
     return new Promise((resolve) => {
-      // Delay 2 seconds then return response
-      setTimeout(() => {
         resolve(imageList);
-      }, 2000);
     });
   }
 
-  //TODO: show loading until images are all loaded
+    const ShowLoading = () => {
+      return (
+        <>
+          <div>Loading...</div>
+        </>
+      );
+    };
+
   return (
     <div>
-      Hello World
-      {images && images.length && <HeaderResults images={{ results: images }} />}
+      {images && images.length && <ImageLoadResults images={{ results: images }} />}
     </div>
   );
 }
