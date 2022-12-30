@@ -29,6 +29,13 @@ const Image = (props) => {
         onMouseEnter={(e) => productNameHandleHover(e)}
         onMouseLeave={productNameHandleNoHover}
       />
+       <span
+          className="js_name"
+          key={`_${index}`}
+          style={{ display: isTooltipShown ? "flex" : "none" }}
+        >
+          {breed}
+        </span>
     </div>
   );
 };
