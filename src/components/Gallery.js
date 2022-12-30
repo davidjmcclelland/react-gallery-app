@@ -1,26 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Image from "./Image";
 import getURIs from "../helpers/getURIs";
-//endpoints
-// 'https://dog.ceo/api/breed/affenpinscher/images/random'
+
 const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
-// "https://jsonplaceholder.typicode.com/users"
-
-const Gallery = () => {
-  const [breeds, setBreeds] = useState([]);
-  const [imageList, setImageList] = useState([]);
-
-  const fetchBreeds = async () => {
-    const response = await fetch(breedsEndPoint);
-    let breeds = await response.json();
-    breeds = Object.keys(breeds.message);
-    setBreeds(breeds);
-    requestRandomPics(getURIs(breeds));
-  };
-
-  useEffect(() => {
-    fetchBreeds();
-  }, []);
 
   const requestRandomPics = async (_imageRequests) => {
     const links = await Promise.all(
@@ -32,15 +14,28 @@ const Gallery = () => {
     const imageURLs = links.map((link) => {
       return link.message;
     });
-    console.log(imageURLs);
-    setImageList(imageURLs);
+    return imageURLs;
+};
+
+const Gallery = () => {
+  const [breeds, setBreeds] = useState([]);
+  
+  const fetchBreeds = async () => {
+    const response = await fetch(breedsEndPoint);
+    let breedList = await response.json();
+    breedList = Object.keys(breedList.message);
+    setBreeds(breedList);
   };
+
+  useEffect(() => {
+    fetchBreeds();
+  }, []);
 
   return (
     <>
-      <div className="js_gallery" key="0">
+      <div className="js_gallery">
         {breeds.map((breed, index) => (
-          <Image breed={breed} imageRequest={imageList[index]} key={index} />
+          <Image breed={breed} key={index} />
         ))}
       </div>
     </>
