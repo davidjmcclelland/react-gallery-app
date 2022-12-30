@@ -39,6 +39,7 @@ function HeaderResults({ images }) {
     setLoadedImages(newLoadedImages);
   }
 
+  //TODO: load images from component or handle hover
   return (
     <div
       id="js_gallery"
@@ -91,6 +92,7 @@ export default function AltGallery() {
     });
   }
 
+  //TODO: show loading until images are all loaded
   return (
     <div>
       Hello World
