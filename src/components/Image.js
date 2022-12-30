@@ -1,16 +1,19 @@
 const Image = (props) => {
   const breed = props.breed;
-  const imageRequest = props.imageRequest;
-  const imageLoaded = props.loadedFunc;
+  const handleImageLoaded = props.loadedFunc;
+  const index = props.index;
+  const imageSrc = props.imageSrc;
 
   return (
-    <div className="js_img" key={breed}>
-      {breed}
+    <div className="js_img" key={index}>
       <img
-        src={imageRequest}
-        index={breed}
-        onLoad={() => imageLoaded()}
-        alt={breed} />
+        className="js_img"
+        src={imageSrc}
+        alt={breed}
+        onLoad={() => {
+          handleImageLoaded(imageSrc);
+        }}
+      />
     </div>
   );
 };

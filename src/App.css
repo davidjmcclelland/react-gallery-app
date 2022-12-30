@@ -1,7 +1,7 @@
 .App {
   display: flex;
   flex-direction: row;
-  align-items:flex-end;
+  
   background-color: gray;
 }
 
@@ -10,7 +10,9 @@
   width: 100%;
   height: 100%;
   flex-wrap: wrap;
+  align-items:flex-end;
 }
+
 #js_loading{
   display: flex;
   flex-direction: column;
@@ -23,9 +25,6 @@
 
 .js_img {
   width: 300px;
-  height:300px;
-  border:1pt solid #282c34;
-  background-color: white;
+  padding: 2px 5px;
   overflow: hidden;
-  margin: 10px;
 }
