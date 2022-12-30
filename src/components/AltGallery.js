@@ -16,7 +16,7 @@ const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
     return imageURLs
 };
   
-function HeaderResults({ cars }) {
+function HeaderResults({ images }) {
   const [loadedImages, setLoadedImages] = useState({});
   const [ready, setReady] = useState(false);
 
@@ -29,8 +29,8 @@ function HeaderResults({ cars }) {
     // Check if all images is loaded
     const newLoadedImagesArr = Object.keys(newLoadedImages);
     if (
-      newLoadedImagesArr.length === cars.results.length &&
-      cars.results.every((v) => newLoadedImagesArr.includes(v))
+      newLoadedImagesArr.length === images.results.length &&
+      images.results.every((v) => newLoadedImagesArr.includes(v))
     ) {
       console.log("All images loaded");
       setReady(true);
@@ -41,13 +41,14 @@ function HeaderResults({ cars }) {
 
   return (
     <div
-      className="results"
+      id="js_gallery"
       style={{ visibility: ready ? "visible" : "hidden" }}
     >
-      {cars.results.map((result, index) => {
+      {images.results.map((result, index) => {
         return (
           <div className="result-item" key={index}>
             <img
+              className="js_img"
               src={result}
               alt="..."
               onLoad={() => {
@@ -93,7 +94,7 @@ export default function AltGallery() {
   return (
     <div>
       Hello World
-      {images && images.length && <HeaderResults cars={{ results: images }} />}
+      {images && images.length && <HeaderResults images={{ results: images }} />}
     </div>
   );
 }

@@ -5,7 +5,7 @@
   background-color: gray;
 }
 
-.js_gallery{
+#js_gallery{
   display: flex;
   width: 100%;
   height: 100%;
