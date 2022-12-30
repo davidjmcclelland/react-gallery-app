@@ -36,7 +36,6 @@ const ImageLoadResults = ({ images }) => {
       console.log("All images loaded");
       setReady(true);
     }
-
     setLoadedImages(newLoadedImages);
   }
 
@@ -68,7 +67,9 @@ const ImageLoadResults = ({ images }) => {
       </>
   );
 }
+
 let breeds;
+
 const Gallery = () => {
   const [images, setImages] = useState([]);
   const fetchBreeds = async () => {
@@ -98,7 +99,7 @@ const Gallery = () => {
 
   return (
     <div>
-      {images && images.length && <ImageLoadResults images={{ results: images }} />}
+      {images && <ImageLoadResults images={{ results: images }} />}
     </div>
   );
 }
