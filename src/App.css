@@ -1,7 +1,7 @@
 .App {
   display: flex;
   flex-direction: row;
-  
+
   background-color: gray;
 }
 
@@ -24,19 +24,25 @@
 }
 
 .js_img {
+  display: flex;
   width: 300px;
-  padding: 2px 5px;
   overflow: hidden;
 }
 
+.image_container {
+  padding: 2px 5px;
+}
+
 span.js_name {
-  transform: translate(-190px,-10px);
   text-align: left;
   color: white;
   background-color: black;
   opacity: 60%;
   flex: 0 0 auto;
-  line-height: 12pt;
-  height: 18px;
+  height: 24px;
   object-fit: contain;
+  display:none;
+  margin-left: 0px;
+  margin-top: -24px;
+  z-index: 10000;
 }

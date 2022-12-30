@@ -7,7 +7,7 @@ const Image = (props) => {
   const index = props.index;
   const imageSrc = props.imageSrc;
 
-  const [isTooltipShown, setIsTooltipShown] = useState([false]);
+  const [isTooltipShown, setIsTooltipShown] = useState(false);
   
   const productNameHandleHover = () => {
     setIsTooltipShown(true);
@@ -18,24 +18,26 @@ const Image = (props) => {
   };
 
   return (
-    <div className="js_img" key={index}>
-      <img
-        className="js_img"
-        src={imageSrc}
-        alt={breed}
-        onLoad={() => {
-          handleImageLoaded(imageSrc);
-        }}
-        onMouseEnter={(e) => productNameHandleHover(e)}
-        onMouseLeave={productNameHandleNoHover}
-      />
-       <span
+    <div className="image_container" key={index}>
+      <div>
+        <img
+          className="js_img"
+          src={imageSrc}
+          alt={breed}
+          onLoad={() => {
+            handleImageLoaded(imageSrc);
+          }}
+          onMouseEnter={(e) => productNameHandleHover(e)}
+          onMouseLeave={productNameHandleNoHover}
+        />
+        <span
           className="js_name"
           key={`_${index}`}
-          style={{ display: isTooltipShown ? "flex" : "none" }}
+          style={{ display: isTooltipShown ? "block" : "none" }}
         >
           {breed}
         </span>
+      </div>
     </div>
   );
 };
