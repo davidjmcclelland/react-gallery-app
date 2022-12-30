@@ -40,17 +40,13 @@ const ImageLoadResults = ({ images }) => {
     setLoadedImages(newLoadedImages);
   }
 
-    let height = {
-       display: ready ? "none" : "flex"
-  };
-  
   let overflow = {
     overflow: ready ? "visible" : 'hidden'
   }
 
-    let display = {
-       visibility: ready ? "visible" : "hidden"
-    };
+  let display = {
+    visibility: ready ? "visible" : "hidden"
+  };
 
   return (
     <>
