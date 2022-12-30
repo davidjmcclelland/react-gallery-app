@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getURIs from "../helpers/getURIs";
+import Image from './Image';
 
 const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
 
@@ -55,28 +56,24 @@ const ImageLoadResults = ({ images }) => {
     >
       {images.results.map((result, index) => {
         return (
-          <div className="result-item" key={index}>
-            <img
-              className="js_img"
-              src={result}
-              alt="..."
-              onLoad={() => {
-                handleImageLoaded(result);
-              }}
-            />
-          </div>
+          <Image
+            breed={breeds[index]}
+            loadedFunc={handleImageLoaded}
+            index={index}
+            imageSrc={result}
+          />
         );
       })}
       </div>
       </>
   );
 }
-
+let breeds;
 const Gallery = () => {
   const [images, setImages] = useState([]);
   const fetchBreeds = async () => {
     const response = await fetch(breedsEndPoint);
-    let breeds = await response.json();
+    breeds = await response.json();
     breeds = Object.keys(breeds.message);
     return breeds;
   };
