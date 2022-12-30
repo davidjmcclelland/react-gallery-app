@@ -26,6 +26,8 @@ const Image = (props) => {
         onLoad={() => {
           handleImageLoaded(imageSrc);
         }}
+        onMouseEnter={(e) => productNameHandleHover(e)}
+        onMouseLeave={productNameHandleNoHover}
       />
     </div>
   );
