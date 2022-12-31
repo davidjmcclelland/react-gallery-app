@@ -1,21 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "./Image";
-import getURIs from "../helpers/getURIs";
 
 const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
-
-  const requestRandomPics = async (_imageRequests) => {
-    const links = await Promise.all(
-      _imageRequests.map(async (url) => {
-        const resp = await fetch(url);
-        return resp.json();
-      })
-    );
-    const imageURLs = links.map((link) => {
-      return link.message;
-    });
-    return imageURLs;
-};
 
 const Gallery = () => {
   const [breeds, setBreeds] = useState([]);
