@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen, waitFor } from "@testing-library/react";
+import App from "./App";
 
-test('renders text', () => {
+test("renders text", async () => {
   render(<App />);
-  const element = screen.getByText(/get breeds/i);
-  expect(element).toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.getByText(/african/i)).toBeInTheDocument();
+  });
 });
