@@ -3,6 +3,7 @@
   flex-direction: row;
   align-items:flex-end;
   background-color: gray;
+  width: 985px;
 }
 
 .js_gallery{
@@ -19,4 +20,5 @@
   background-color: white;
   overflow: hidden;
   margin: 10px;
+  font-size:x-large;
 }
