@@ -4,7 +4,7 @@ import getURIs from "../helpers/getURIs";
 
 const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
 
-const requestRandomPics = async (_imageRequests) => {
+const requestRandomPicURLs = async (_imageRequests) => {
   const links = await Promise.all(
     _imageRequests.map(async (url) => {
       const resp = await fetch(url);
@@ -31,7 +31,7 @@ const requestRandomPics = async (_imageRequests) => {
 
     useEffect(() => {
       fetchBreeds().then((data) => {
-        requestRandomPics(getURIs(data)).then((data) => {
+        requestRandomPicURLs(getURIs(data)).then((data) => {
           fetchImages(data).then((data) => {
             setImages(data);
           });
