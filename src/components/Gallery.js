@@ -100,14 +100,6 @@ export default function Gallery() {
     });
   }
 
-  const ShowLoading = () => {
-    return (
-      <>
-        <div>Loading...</div>
-      </>
-    );
-  };
-
   return (
     <div>
       {images && images.length && (

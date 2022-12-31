@@ -9,26 +9,27 @@ const Image = (props) => {
 
   const [isTooltipShown, setIsTooltipShown] = useState(false);
   
-  const productNameHandleHover = () => {
+  const breedNameHandleHover = () => {
     setIsTooltipShown(true);
   };
 
-  const productNameHandleNoHover = () => {
+  const breedNameHandleNoHover = () => {
     setIsTooltipShown(false);
   };
 
   return (
     <div className="image_container" key={index}>
-      <div>
+      <>
         <img
           className="js_img"
+          key={`img${index}`}
           src={imageSrc}
           alt={breed}
           onLoad={() => {
             handleImageLoaded(imageSrc);
           }}
-          onMouseEnter={(e) => productNameHandleHover(e)}
-          onMouseLeave={productNameHandleNoHover}
+          onMouseEnter={(e) => breedNameHandleHover(e)}
+          onMouseLeave={breedNameHandleNoHover}
         />
         <span
           className="js_name"
@@ -37,7 +38,7 @@ const Image = (props) => {
         >
           &nbsp;{breed}
         </span>
-      </div>
+      </>
     </div>
   );
 };
