@@ -3,6 +3,8 @@
   flex-direction: row;
   align-items:flex-end;
   background-color: gray;
+  transform: scale(0.5);
+  transform-origin: 0 0
 }
 
 .js_gallery{
