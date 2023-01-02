@@ -27,7 +27,7 @@ const ImageLoadResults = ({ images }) => {
       [src]: true,
     };
 
-    // Check if all images is loaded
+    // Check if all images are loaded
     const newLoadedImagesArr = Object.keys(newLoadedImages);
     if (
       newLoadedImagesArr.length === images.results.length &&
@@ -45,12 +45,15 @@ const ImageLoadResults = ({ images }) => {
   }
 
   let display = {
-    visibility: ready ? "visible" : "hidden"
+    display: ready ? "flex" : "none"
   };
 
   return (
     <>
-      <div id="js_loading" style={{ display: ready ? "none" : "flex" }}>
+      <div
+        id="js_loading"
+        style={{ display: ready ? "none" : "flex" }}
+      >
         <h1>Loading...</h1>
       </div>
       <div id="js_gallery" style={{ ...display, ...overflow }}>
@@ -63,6 +66,7 @@ const ImageLoadResults = ({ images }) => {
                 loadedFunc={handleImageLoaded}
                 index={index}
                 imageSrc={result}
+                key={`breed${index}`}
               />
             );
           })}
