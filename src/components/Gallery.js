@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import getURIs from "../helpers/getURIs";
 import Image from "./Image";
+import Loader from "./Loader"
 
 const breedsEndPoint = "https://dog.ceo/api/breeds/list/all";
 
@@ -51,12 +52,11 @@ const ImageLoadResults = ({ images }) => {
   return (
     <>
       <div
-        id="js_loading"
         style={{ display: ready ? "none" : "flex" }}
       >
-        <h1>Loading...</h1>
+        <Loader />
       </div>
-      <div id="js_gallery" style={{ ...display, ...overflow }}>
+     { <div id="js_gallery" style={{ ...display, ...overflow }}>
         {breeds &&
           breeds.length > 0 &&
           images.results.map((result, index) => {
@@ -70,7 +70,7 @@ const ImageLoadResults = ({ images }) => {
               />
             );
           })}
-      </div>
+      </div>}
     </>
   );
 };

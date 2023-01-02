@@ -1,6 +1,14 @@
 // BASIC
 body {
   background-color: rgb(0, 0, 0);
+  display: flex;
+}
+
+#root {
+  display:flex;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
 }
 
 #js_gallery {
@@ -8,15 +16,10 @@ body {
   flex-wrap: wrap;
 }
 
-#js_loading{
-  color:white;
-  display: flex;
-  flex-direction: column;
+#js_loading {
   align-items: center;
   align-self: center;
   justify-content: center;
-  flex-wrap: wrap;
-  max-height: 50%;
 }
 
 .image_container {
@@ -77,5 +80,167 @@ span.js_name {
     width: 100%;
     max-height: 75vh;
     min-width: 0;
+  }
+}
+
+* {
+  border: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-size: calc(16px + (24 - 16)*(100vw - 320px)/ (1280 - 320));
+}
+
+body,
+.preloader {
+  display: flex;
+}
+
+body {
+  background: #000;
+  color: #FFF;
+  font: 1em Dosis, sans-serif;
+  height: 100vh;
+  line-height: 1.5;
+  perspective: 40em;
+}
+
+.preloader {
+  animation: tiltSpin 15s linear infinite;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 17em;
+  height: 17em;
+}
+
+.preloader,
+.preloader__ring {
+  transform-style: preserve-3d;
+}
+
+.preloader__ring {
+  animation-name: spin;
+  animation-duration: 7.5s;
+  animation-timing-function: inherit;
+  animation-iteration-count: inherit;
+  font-size: 2em;
+  position: relative;
+  height: 3rem;
+  width: 1.5rem;
+}
+
+.preloader__ring:nth-child(even) {
+  animation-direction: reverse;
+}
+
+.preloader__sector {
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translateZ(5rem);
+}
+
+.preloader__sector,
+.preloader__sector:empty:before {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.preloader__sector:empty:before {
+  background: linear-gradient(transparent 45%, currentColor 45% 55%, transparent 55%);
+  content: "";
+}
+
+.preloader__sector:nth-child(2) {
+  transform: rotateY(21.1764705882deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(3) {
+  transform: rotateY(42.3529411765deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(4) {
+  transform: rotateY(63.5294117647deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(5) {
+  transform: rotateY(84.7058823529deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(6) {
+  transform: rotateY(105.8823529412deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(7) {
+  transform: rotateY(127.0588235294deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(8) {
+  transform: rotateY(148.2352941176deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(9) {
+  transform: rotateY(169.4117647059deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(10) {
+  transform: rotateY(190.5882352941deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(11) {
+  transform: rotateY(211.7647058824deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(12) {
+  transform: rotateY(232.9411764706deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(13) {
+  transform: rotateY(254.1176470588deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(14) {
+  transform: rotateY(275.2941176471deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(15) {
+  transform: rotateY(296.4705882353deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(16) {
+  transform: rotateY(317.6470588235deg) translateZ(5rem);
+}
+
+.preloader__sector:nth-child(17) {
+  transform: rotateY(338.8235294118deg) translateZ(5rem);
+}
+
+/* Animations */
+@keyframes tiltSpin {
+  from {
+    transform: rotateY(0) rotateX(30deg);
+  }
+
+  to {
+    transform: rotateY(1turn) rotateX(30deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0);
+  }
+
+  to {
+    transform: rotateY(1turn);
   }
 }
